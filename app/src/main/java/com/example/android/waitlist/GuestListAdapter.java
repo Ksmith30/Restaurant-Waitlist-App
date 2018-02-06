@@ -39,6 +39,7 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
                 .COLUMN_GUEST_NAME));
         int partySize = mCursor.getInt(mCursor.getColumnIndex(WaitlistContract.WaitlistEntry
                 .COLUMN_PARTY_SIZE));
+        // Test
 
         holder.nameTextView.setText(guestName);
         holder.partySizeTextView.setText(String.valueOf(partySize));
