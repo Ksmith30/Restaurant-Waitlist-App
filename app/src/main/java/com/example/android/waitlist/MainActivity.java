@@ -1,5 +1,6 @@
 package com.example.android.waitlist;
 
+import android.content.ClipData;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
@@ -46,6 +48,20 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new GuestListAdapter(this, cursor);
 
         waitlistRecyclerView.setAdapter(mAdapter);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
+                0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
+            }
+        });
 
     }
 
@@ -96,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
         contentValues.put(WaitlistContract.WaitlistEntry.COLUMN_PARTY_SIZE, partySize);
 
         return mDb.insert(WaitlistContract.WaitlistEntry.TABLE_NAME, null, contentValues);
+    }
+
+    private boolean removeGuest(long guestID) {
+        return mDb.delete(WaitlistContract.WaitlistEntry.TABLE_NAME,
+                WaitlistContract.WaitlistEntry._ID + "=" + guestID, null) > 0;
     }
 
 }
