@@ -8,15 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.android.waitlist.data.WaitlistContract;
+
 
 public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.GuestViewHolder> {
 
     private Context mContext;
-    private int mCount;
+    private Cursor mCursor;
 
-    public GuestListAdapter(Context context, int count) {
+    public GuestListAdapter(Context context, Cursor cursor) {
         this.mContext = context;
-        mCount = count;
+        mCursor = cursor;
     }
 
     @Override
@@ -29,13 +31,24 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
 
     @Override
     public void onBindViewHolder(GuestViewHolder holder, int position) {
+        if (!mCursor.moveToPosition(position)) {
+            return;
+        }
+
+        String guestName = mCursor.getString(mCursor.getColumnIndex(WaitlistContract.WaitlistEntry
+                .COLUMN_GUEST_NAME));
+        int partySize = mCursor.getInt(mCursor.getColumnIndex(WaitlistContract.WaitlistEntry
+                .COLUMN_PARTY_SIZE));
+
+        holder.nameTextView.setText(guestName);
+        holder.partySizeTextView.setText(String.valueOf(partySize));
 
     }
 
 
     @Override
     public int getItemCount() {
-        return mCount;
+        return mCursor.getCount();
     }
 
     class GuestViewHolder extends RecyclerView.ViewHolder {
