@@ -69,7 +69,7 @@ public class DatabaseTest {
         /* This Cursor will contain the names of each table in our database */
         Cursor tableNameCursor = database.rawQuery(
                 "SELECT name FROM sqlite_master WHERE type='table' AND name='" +
-                        WaitlistContract.WaitListEntry.TABLE_NAME + "'",
+                        WaitlistContract.WaitlistEntry.TABLE_NAME + "'",
                 null);
 
         /*
@@ -83,7 +83,7 @@ public class DatabaseTest {
 
         /* If this fails, it means that your database doesn't contain the expected table(s) */
         assertEquals("Error: Your database was created without the expected tables.",
-                WaitlistContract.WaitListEntry.TABLE_NAME, tableNameCursor.getString(0));
+                WaitlistContract.WaitlistEntry.TABLE_NAME, tableNameCursor.getString(0));
 
         /* Always close a cursor when you are done with it */
         tableNameCursor.close();
@@ -105,12 +105,12 @@ public class DatabaseTest {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
-        testValues.put(WaitlistContract.WaitListEntry.COLUMN_GUEST_NAME, "test name");
-        testValues.put(WaitlistContract.WaitListEntry.COLUMN_PARTY_SIZE, 99);
+        testValues.put(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME, "test name");
+        testValues.put(WaitlistContract.WaitlistEntry.COLUMN_PARTY_SIZE, 99);
 
         /* Insert ContentValues into database and get first row ID back */
         long firstRowId = database.insert(
-                WaitlistContract.WaitListEntry.TABLE_NAME,
+                WaitlistContract.WaitlistEntry.TABLE_NAME,
                 null,
                 testValues);
 
@@ -123,7 +123,7 @@ public class DatabaseTest {
          */
         Cursor wCursor = database.query(
                 /* Name of table on which to perform the query */
-                WaitlistContract.WaitListEntry.TABLE_NAME,
+                WaitlistContract.WaitlistEntry.TABLE_NAME,
                 /* Columns; leaving this null returns every column in the table */
                 null,
                 /* Optional specification for columns in the "where" clause above */
@@ -167,18 +167,18 @@ public class DatabaseTest {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
-        testValues.put(WaitlistContract.WaitListEntry.COLUMN_GUEST_NAME, "test name");
-        testValues.put(WaitlistContract.WaitListEntry.COLUMN_PARTY_SIZE, 99);
+        testValues.put(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME, "test name");
+        testValues.put(WaitlistContract.WaitlistEntry.COLUMN_PARTY_SIZE, 99);
 
         /* Insert ContentValues into database and get first row ID back */
         long firstRowId = database.insert(
-                WaitlistContract.WaitListEntry.TABLE_NAME,
+                WaitlistContract.WaitlistEntry.TABLE_NAME,
                 null,
                 testValues);
 
         /* Insert ContentValues into database and get another row ID back */
         long secondRowId = database.insert(
-                WaitlistContract.WaitListEntry.TABLE_NAME,
+                WaitlistContract.WaitlistEntry.TABLE_NAME,
                 null,
                 testValues);
 
@@ -208,18 +208,18 @@ public class DatabaseTest {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
-        testValues.put(WaitlistContract.WaitListEntry.COLUMN_GUEST_NAME, "test name");
-        testValues.put(WaitlistContract.WaitListEntry.COLUMN_PARTY_SIZE, 99);
+        testValues.put(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME, "test name");
+        testValues.put(WaitlistContract.WaitlistEntry.COLUMN_PARTY_SIZE, 99);
 
         /* Insert ContentValues into database and get first row ID back */
         long firstRowId = database.insert(
-                WaitlistContract.WaitListEntry.TABLE_NAME,
+                WaitlistContract.WaitlistEntry.TABLE_NAME,
                 null,
                 testValues);
 
         /* Insert ContentValues into database and get another row ID back */
         long secondRowId = database.insert(
-                WaitlistContract.WaitListEntry.TABLE_NAME,
+                WaitlistContract.WaitlistEntry.TABLE_NAME,
                 null,
                 testValues);
 
@@ -229,7 +229,7 @@ public class DatabaseTest {
         /* This Cursor will contain the names of each table in our database */
         Cursor tableNameCursor = database.rawQuery(
                 "SELECT name FROM sqlite_master WHERE type='table' AND name='" +
-                        WaitlistContract.WaitListEntry.TABLE_NAME + "'",
+                        WaitlistContract.WaitlistEntry.TABLE_NAME + "'",
                 null);
 
         assertTrue(tableNameCursor.getCount() == 1);
@@ -240,7 +240,7 @@ public class DatabaseTest {
          */
         Cursor wCursor = database.query(
                 /* Name of table on which to perform the query */
-                WaitlistContract.WaitListEntry.TABLE_NAME,
+                WaitlistContract.WaitlistEntry.TABLE_NAME,
                 /* Columns; leaving this null returns every column in the table */
                 null,
                 /* Optional specification for columns in the "where" clause above */

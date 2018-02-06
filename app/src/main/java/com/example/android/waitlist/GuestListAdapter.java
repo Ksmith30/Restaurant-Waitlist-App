@@ -1,6 +1,7 @@
 package com.example.android.waitlist;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +12,11 @@ import android.widget.TextView;
 public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.GuestViewHolder> {
 
     private Context mContext;
+    private int mCount;
 
-    /**
-     * Constructor using the context and the db cursor
-     *
-     * @param context the calling context/activity
-     */
-    public GuestListAdapter(Context context) {
+    public GuestListAdapter(Context context, int count) {
         this.mContext = context;
+        mCount = count;
     }
 
     @Override
@@ -37,13 +35,9 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mCount;
     }
 
-
-    /**
-     * Inner class to hold the views needed to display a single item in the recycler-view
-     */
     class GuestViewHolder extends RecyclerView.ViewHolder {
 
         // Will display the guest name
@@ -51,13 +45,6 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
         // Will display the party size number
         TextView partySizeTextView;
 
-        /**
-         * Constructor for our ViewHolder. Within this constructor, we get a reference to our
-         * TextViews
-         *
-         * @param itemView The View that you inflated in
-         *                 {@link GuestListAdapter#onCreateViewHolder(ViewGroup, int)}
-         */
         public GuestViewHolder(View itemView) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.name_text_view);
