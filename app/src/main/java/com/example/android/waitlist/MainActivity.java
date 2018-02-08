@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView waitlistRecyclerView;
+        final RecyclerView waitlistRecyclerView;
 
         mNewGuestNameEditDataBase = (EditText) findViewById(R.id.person_name_edit_text);
         mNewPartySizedEditText = (EditText) findViewById(R.id.party_count_edit_text);
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         waitlistRecyclerView.setAdapter(mAdapter);
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -59,9 +59,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
+                long id = (long) viewHolder.itemView.getTag();
+                removeGuest(id);
+                mAdapter.swapCursor(getAllGuests());
             }
-        });
+        }).attachToRecyclerView(waitlistRecyclerView);
 
     }
 

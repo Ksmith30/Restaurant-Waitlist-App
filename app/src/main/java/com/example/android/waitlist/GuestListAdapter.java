@@ -39,10 +39,12 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
                 .COLUMN_GUEST_NAME));
         int partySize = mCursor.getInt(mCursor.getColumnIndex(WaitlistContract.WaitlistEntry
                 .COLUMN_PARTY_SIZE));
+        long id = mCursor.getLong(mCursor.getColumnIndex(WaitlistContract.WaitlistEntry._ID));
 
         holder.nameTextView.setText(guestName);
         holder.partySizeTextView.setText(String.valueOf(partySize));
 
+        holder.itemView.setTag(id);
     }
 
     @Override
